@@ -1,5 +1,5 @@
 # Project Details
-Sample project explaining process of deploying Azure resources using ARM templates, owershell scripts and Azure DevOps CICD.
+Sample project explaining process of deploying Azure resources using ARM templates, Powershell scripts and Azure DevOps CICD.
 
 ## Prerequisites
 ### Local Development
