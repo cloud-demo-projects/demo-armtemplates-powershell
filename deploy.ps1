@@ -1,7 +1,56 @@
+<#
+.DESCRIPTION
+    This script will deploy the ARM template
 
-New-AzResourceGroup -Name myResourceGroup -Location "West Europe"
+.PARAMETER ResourceGroupName [String]
+    Name of the resource group
+
+.PARAMETER Location [String]
+    Location of the deloyment
+#>
+
+[CmdletBinding()]
+Param (
+    [Parameter(Mandatory)]
+    [String] $ResourceGroupName,
+
+    [Parameter(Mandatory)]
+    [String] $Location
+)
+
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
+
+#. $PSScriptRoot/TODO
+
+Write-Host "Resource group deployment starting"
+
+New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 
 $templateFile = "azuredeploy.json"
-$parameterFile="azuredeploy.parameters.dev.json"
+$parameterFile = "azuredeploy.parameters.dev.json"
 
-New-AzResourceGroupDeployment -Name myTemplate -ResourceGroupName myResourceGroup -TemplateFile $templateFile -TemplateParameterFile $parameterFile
+If (!(Test-Path $TemplateFile)) {
+    Write-Host "Template file not found"
+}
+
+$params = @{
+    "ResourceGroupName"     = $ResourceGroupName
+    "Mode"                  = "Incremental"
+    "TemplateFile"          = $templateFile
+    "TemplateParameterFile" = $parameterFile
+    "location"              = $location
+    "ErrorVariable"         = "errorMessages"
+}
+
+Test-AzResourceGroupDeployment @params -ErrorAction Stop
+Write-Host "Validation Succeded"
+
+New-AzResourceGroupDeployment @params -DeploymentDebugLogLevel None
+
+If ($errorMessages ){
+    Write-Error "Deployment Failed"
+}
+Else {
+    Write-Host "Deployment Succeded"
+}
