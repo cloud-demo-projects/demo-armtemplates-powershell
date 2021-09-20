@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: ARMDeployment
+  jobs:
+  - job: Deploy
+    steps:
+    - task: AzurePowerShell@5
+      inputs:
+        azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
+        ScriptType: 'FilePath'
+        ScriptPath: 'deploy.ps1'
+        azurePowerShellVersion: 'LatestVersion'
