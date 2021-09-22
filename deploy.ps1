@@ -23,7 +23,8 @@ Set-StrictMode -Version Latest
 
 #. $PSScriptRoot/TODO
 
-Write-Host "Resource group deployment starting"
+# Write-Host "Resource group deployment starting with $ResourceGroupName and $Location"
+# New-AzDeployment -Name $ResourceGroupName -TemplateFile "rgdeploy.json" -Location $Location
 
 New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 
