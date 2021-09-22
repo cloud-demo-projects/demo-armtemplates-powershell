@@ -35,8 +35,7 @@ stages:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
         ScriptType: 'InlineScript'
         Inline: |
-          Install-Module Pester -Force -SkipPublisherCheck -RequiredVersion 4.9.0
-          Import-Module Pester -PassThru
+          Install-Module -Name Pester -RequiredVersion 4.9.0 -Scope CurrentUser -Force -SkipPublisherCheck
         azurePowerShellVersion: 'LatestVersion'
     - task: AzurePowerShell@5
       displayName: Run Pester Tests
