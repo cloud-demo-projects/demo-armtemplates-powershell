@@ -22,10 +22,10 @@ pool:
   vmImage: windows-latest
 
 stages:
-- stage: ARMDeployment
+- stage: Build_ARM_Deployment
   jobs:
-  - job: Deploy
-    displayName: Deploy ARM Template
+  - job: Build_ARM
+    displayName: Build ARM Template
     condition: always()
     steps:
     - task: AzurePowerShell@5
@@ -46,6 +46,13 @@ stages:
         Inline: |
           Invoke-Pester -EnableExit -Script @{Path="$(System.DefaultWorkingDirectory)/pester/Parameter.Tests.ps1"; Parameters=@{ ParameterPath="$(System.DefaultWorkingDirectory)/parameters/azuredeploy.parameters.dev.json" }}  -OutputFile $(Build.ArtifactStagingDirectory)/Test-Pester-Readme.xml
         azurePowerShellVersion: 'LatestVersion'
+        
+- stage: Deploy_ARM_Template
+  jobs:
+  - job: Deploy_ARM
+    displayName: Deploy ARM Template
+    condition: always()
+    steps:
     - task: AzurePowerShell@5
       displayName: Deploy ARM Template
       name: deploy_arm_template
