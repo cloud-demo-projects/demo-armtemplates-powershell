@@ -39,6 +39,15 @@ stages:
           Import-Module Pester -PassThru
         azurePowerShellVersion: 'LatestVersion'
     - task: AzurePowerShell@5
+      displayName: Run Pester Tests
+      name: run_pester_tests
+      inputs:
+        azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
+        ScriptType: 'InlineScript'
+        Inline: |
+          Invoke-Pester $(System.DefaultWorkingDirectory)/pester/Parameter.Tests.ps1  -OutputFile $(Build.ArtifactStagingDirectory)/Test-Pester-Readme.xml -ParameterPath $(System.DefaultWorkingDirectory)/parameters/azuredeploy.parameters.dev.json
+        azurePowerShellVersion: 'LatestVersion'
+    - task: AzurePowerShell@5
       displayName: Deploy ARM Template
       name: deploy_arm_template
       inputs:
