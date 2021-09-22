@@ -40,4 +40,5 @@ stages:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
         ScriptType: 'FilePath'
         ScriptPath: 'deploy.ps1'
+        ScriptArguments: "-ResourceGroupName 'test-webapp' -Location 'west europe' "
         azurePowerShellVersion: 'LatestVersion'
