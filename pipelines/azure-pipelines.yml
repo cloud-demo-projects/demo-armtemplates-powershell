@@ -45,7 +45,7 @@ stages:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
         ScriptType: 'InlineScript'
         Inline: |
-          Invoke-Pester $(System.DefaultWorkingDirectory)/pester/Parameter.Tests.ps1  -OutputFile $(Build.ArtifactStagingDirectory)/Test-Pester-Readme.xml -ParameterPath $(System.DefaultWorkingDirectory)/parameters/azuredeploy.parameters.dev.json
+          Invoke-Pester -Script @{Path="$(System.DefaultWorkingDirectory)/pester/Parameter.Tests.ps1"; Parameters=@{ ParameterPath="$(System.DefaultWorkingDirectory)/parameters/azuredeploy.parameters.dev.json" }}  -OutputFile $(Build.ArtifactStagingDirectory)/Test-Pester-Readme.xml
         azurePowerShellVersion: 'LatestVersion'
     - task: AzurePowerShell@5
       displayName: Deploy ARM Template
