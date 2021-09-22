@@ -29,7 +29,7 @@ stages:
     condition: always()
     steps:
     - task: AzurePowerShell@5
-      displayName: Pester Tests
+      displayName: Install Pester Module
       name: install_pester_module
       inputs:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
