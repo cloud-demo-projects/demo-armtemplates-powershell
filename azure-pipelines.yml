@@ -1,0 +1,44 @@
+# Practical Design Approach
+#
+# Build Stage:
+# 1. Create parameter file based upon input e.g. from Azure DevOps extension
+# 2. Execute Pester tests on generated file
+# 3. Raise bug in case of issue in parameter file 
+#
+# Deploy Stage:
+# 4. Deploy ARM template with paramter file
+#
+
+# Build Name
+name: $(TeamProject)_$(SourceBranch)_$(BuildId)_$(Date:yyyyMMdd)
+
+trigger:
+- none
+
+pool:
+  vmImage: windows-latest
+
+stages:
+- stage: ARMDeployment
+  jobs:
+  - job: Deploy
+    displayName: Deploy ARM Template
+    condition: always()
+    steps:
+    - task: AzurePowerShell@5
+      displayName: Pester Tests
+      name: install_pester_module
+      inputs:
+        azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
+        ScriptType: 'InlineScript'
+        Inline: 'Install-Module Pester -Force -SkipPublisherCheck'
+        azurePowerShellVersion: 'LatestVersion'
+    - task: AzurePowerShell@5
+      displayName: PS Script to deploy ARM Template
+      name: deploy_arm_template
+      inputs:
+        azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
+        ScriptType: 'FilePath'
+        ScriptPath: '$(System.DefaultWorkingDirectory)/scripts/deploy.ps1'
+        ScriptArguments: "-ResourceGroupName 'test-webapp' -Location 'west europe' "
+        azurePowerShellVersion: 'LatestVersion'
