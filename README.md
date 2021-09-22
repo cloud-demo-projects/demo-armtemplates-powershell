@@ -14,3 +14,8 @@ Sample project for deploying Azure resource through ARM templates, BDD with Pest
 - Azure DevOps Account
 - Azure Subscription
 - Service principle with appropriate rights
+
+### Pester Short Walkthrough
+- Describe: group of tests e.g. imagine tests for your parameter file
+- Context: a particular test e.g. imagine test for validating a section of parameter file
+- It: a test case, while running Invoke-Pester we get a result pass or fail 
