@@ -37,7 +37,7 @@ stages:
         Inline: 'Install-Module Pester -Force -SkipPublisherCheck'
         azurePowerShellVersion: 'LatestVersion'
     - task: AzurePowerShell@5
-      displayName: PS Script to deploy ARM Template
+      displayName: Deploy ARM Template
       name: deploy_arm_template
       inputs:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
