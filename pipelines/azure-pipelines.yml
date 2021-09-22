@@ -34,7 +34,9 @@ stages:
       inputs:
         azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
         ScriptType: 'InlineScript'
-        Inline: 'Install-Module Pester -Force -SkipPublisherCheck'
+        Inline: |
+          Install-Module Pester -Force -SkipPublisherCheck
+          Import-Module Pester -PassThru
         azurePowerShellVersion: 'LatestVersion'
     - task: AzurePowerShell@5
       displayName: Deploy ARM Template
