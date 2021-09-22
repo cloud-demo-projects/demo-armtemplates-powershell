@@ -7,6 +7,13 @@
 
 .PARAMETER Location [String]
     Location of the deloyment
+
+.PARAMETER TemplatePath [String]
+    TemplatePath path
+
+.PARAMETER ParameterPath [String]
+    ParameterPath path
+
 #>
 
 [CmdletBinding()]
@@ -15,7 +22,13 @@ Param (
     [String] $ResourceGroupName,
 
     [Parameter(Mandatory)]
-    [String] $Location
+    [String] $Location,
+
+    [Parameter(Mandatory)]
+    [String] $TemplatePath,
+
+    [Parameter(Mandatory)]
+    [String] $ParameterPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -28,8 +41,8 @@ Set-StrictMode -Version Latest
 
 New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 
-$templateFile = "../templates/azuredeploy.json"
-$parameterFile = "../parameters/azuredeploy.parameters.dev.json"
+$templateFile = "$TemplatePath/azuredeploy.json"
+$parameterFile = "$ParameterPath/azuredeploy.parameters.dev.json"
 
 If (!(Test-Path $TemplateFile)) {
     Write-Host "Template file not found"

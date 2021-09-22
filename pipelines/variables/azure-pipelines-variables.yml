@@ -1,0 +1,5 @@
+
+variables:
+  scriptPath: $(System.DefaultWorkingDirectory)/scripts 
+  templatePath: $(System.DefaultWorkingDirectory)/templates 
+  parameterPath: $(System.DefaultWorkingDirectory)/parameters 
