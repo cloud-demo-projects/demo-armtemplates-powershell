@@ -12,4 +12,4 @@ Sample project explaining process of deploying Azure resources using ARM templat
 ### CICD
 - Azure DevOps Account
 - Azure Subscription
-- SPN with appropriate rights
+- Service principle with appropriate rights
