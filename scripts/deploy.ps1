@@ -28,8 +28,8 @@ Set-StrictMode -Version Latest
 
 New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 
-$templateFile = "azuredeploy.json"
-$parameterFile = "azuredeploy.parameters.dev.json"
+$templateFile = "../templates/azuredeploy.json"
+$parameterFile = "../parameters/azuredeploy.parameters.dev.json"
 
 If (!(Test-Path $TemplateFile)) {
     Write-Host "Template file not found"
