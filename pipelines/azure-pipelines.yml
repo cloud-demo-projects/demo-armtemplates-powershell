@@ -2,11 +2,11 @@
 #
 # Build Stage:
 # 1. Create parameter file based upon input e.g. from Azure DevOps extension
-# 2. Execute Pester tests on generated file
+# 2. Install & execute Pester tests on generated parameter file
 # 3. Raise bug in case of issue in parameter file 
 #
 # Deploy Stage:
-# 4. Deploy ARM template with paramter file
+# 4. Deploy ARM template with template & parameter files
 #
 
 # Build Name
