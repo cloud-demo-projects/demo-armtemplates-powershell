@@ -1,8 +1,12 @@
 # Practical Design Approach
 #
+# Build Stage:
 # 1. Create parameter file based upon input e.g. from Azure DevOps extension
 # 2. Execute Pester tests on generated file
-# 3. Deploy ARM template with paramter file
+# 3. Raise bug in case of issue in parameter file 
+#
+# Deploy Stage:
+# 4. Deploy ARM template with paramter file
 #
 
 # Build Name
