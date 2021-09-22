@@ -26,6 +26,14 @@ stages:
     condition: always()
     steps:
     - task: AzurePowerShell@5
+      displayName: Pester Tests
+      name: install_pester_module
+      inputs:
+        azureSubscription: 'Nipun Bahri Subscription(bf0f6779-86d2-467e-8226-10f92a8ad378)'
+        ScriptType: 'FilePath'
+        ScriptPath: 'deploy.ps1'
+        azurePowerShellVersion: 'LatestVersion'
+    - task: AzurePowerShell@5
       displayName: PS Script to deploy ARM Template
       name: deploy_arm_template
       inputs:
