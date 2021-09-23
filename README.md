@@ -8,6 +8,8 @@ The sample shows how to deploy Azure resources with :
 - Azure DevOps pipeline
 
 ## Prerequisites
+Prerequisites are listed down for local development, CICD and Pester usage.
+
 ### Local Development
 - VS Code
 - Extensions
