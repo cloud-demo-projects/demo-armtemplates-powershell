@@ -3,7 +3,7 @@
 # Deploy Azure Resource with ARM Templates, Powershell and Azure DevOps
 The sample shows how to deploy Azure resources with :
 - ARM teamplates used as IaC
-- PowerShell as scripting 
+- PowerShell scripting 
 - Behaviour driver testing(BDD) with Pester module  
 - Azure DevOps pipeline
 
