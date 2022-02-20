@@ -1,6 +1,6 @@
 [![Build Status](https://dev.azure.com/bahrinipun/demo-armtemplates-powershell/_apis/build/status/cloud-demo-projects.demo-armtemplates-powershell?branchName=master)](https://dev.azure.com/bahrinipun/demo-armtemplates-powershell/_build/latest?definitionId=55&branchName=master)
 
-# Deploy Azure Resource with ARM Templates, Powershell and Azure DevOps
+# Deploy Azure Resource with ARM Templates, Powershell and Azure DevOps with Pester(BDD)
 The sample shows how to deploy Azure resources with :
 - ARM teamplates used as IaC
 - PowerShell scripting 
