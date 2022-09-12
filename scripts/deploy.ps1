@@ -1,4 +1,7 @@
 <#
+.SYNOPSIS
+    ARM Template Deployment
+    
 .DESCRIPTION
     This script will deploy the ARM template
 
