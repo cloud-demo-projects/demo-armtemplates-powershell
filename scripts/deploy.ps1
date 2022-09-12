@@ -33,38 +33,39 @@ Param (
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-
 #. $PSScriptRoot/TODO
 
-# Write-Host "Resource group deployment starting with $ResourceGroupName and $Location"
-# New-AzDeployment -Name $ResourceGroupName -TemplateFile "rgdeploy.json" -Location $Location
+function Add-TriggerTemplate {    
+    New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 
-New-AzResourceGroup -Name $ResourceGroupName -Location $Location
+    $templateFile = "$TemplatePath/azuredeploy.json"
+    $parameterFile = "$ParameterPath/azuredeploy.parameters.dev.json"
+    If (!(Test-Path $TemplateFile)) {
+        Write-Host "Template file not found"
+    }
 
-$templateFile = "$TemplatePath/azuredeploy.json"
-$parameterFile = "$ParameterPath/azuredeploy.parameters.dev.json"
+    $params = @{
+        "ResourceGroupName"     = $ResourceGroupName
+        "Mode"                  = "Incremental"
+        "TemplateFile"          = $templateFile
+        "TemplateParameterFile" = $parameterFile
+        "location"              = $location
+        "ErrorVariable"         = "errorMessages"
+    }
+    Write-Host "Starting Template Validation.."
+    Test-AzResourceGroupDeployment @params -ErrorAction Stop
+    Write-Host "Validation Succeded"
 
-If (!(Test-Path $TemplateFile)) {
-    Write-Host "Template file not found"
+    Write-Host "Starting Template Deployment.."
+    New-AzResourceGroupDeployment @params -DeploymentDebugLogLevel None
 }
 
-$params = @{
-    "ResourceGroupName"     = $ResourceGroupName
-    "Mode"                  = "Incremental"
-    "TemplateFile"          = $templateFile
-    "TemplateParameterFile" = $parameterFile
-    "location"              = $location
-    "ErrorVariable"         = "errorMessages"
+
+Try {
+    $templateDeployment = Add-TriggerTemplate
+}
+Catch {
+    Write-Host "Error occured during deployment of $templateDeployment" -BackgroundColor Darkred
+    Throw "$($_.Exception.Message)" 
 }
 
-Test-AzResourceGroupDeployment @params -ErrorAction Stop
-Write-Host "Validation Succeded"
-
-New-AzResourceGroupDeployment @params -DeploymentDebugLogLevel None
-
-If ($errorMessages ){
-    Write-Error "Deployment Failed"
-}
-Else {
-    Write-Host "Deployment Succeded"
-}
